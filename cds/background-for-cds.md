@@ -53,3 +53,68 @@ New Open SQL supports:
 Additionally, maximum number of tables in a join has been increased `from 9 to 50`, and the number of supported subqueries has increased `from 9 to 50`.
 
 With New Open SQL, ABAP programs can also access **SAP HANA built-in functions, views, and procedures**, enabling true code push-down.
+
+## Syntax Differences: Classical vs New Open SQL
+
+To support these enhancements, SAP had to adjust the Open SQL syntax.
+
+One visible difference is how fields are listed in the `SELECT` statement:
+
+- In **Classical Open SQL**, fields are separated by spaces, e.g:
+
+  `SELECT` field1 field2 field3
+
+  `FROM` db_table
+
+- In **New Open SQL**, fields are separated by commas, e.g:
+
+  `SELECT` field1, field2, field3
+
+  `FROM` db_table
+
+Another important change is the introduction of the **@ symbol** for escaping so-called _host variables_. Since ABAP is the host language of Open SQL, any ABAP variable or constant used inside an SQL statement must be prefixed with `@`, except for literals. Example:
+
+- **Classical Open SQL**:
+- `SELECT` field1 field2 field3
+
+  `FROM` db_table
+
+  `INTO TABLE` lt_itab
+
+  `WHERE` field1 = lv_variable
+
+- **New Open SQL**:
+- `SELECT` field1, field2, field3
+
+  `FROM` db_table
+
+  `INTO TABLE` `@`lt_itab
+
+  `WHERE` field1 = `@`lv_variable
+
+Classical Open SQL syntax is still valid, but only for statements that use features available before release 7.40 SP05.
+
+As soon as a statement uses any new feature, New Open SQL syntax becomes mandatory, and old and new syntax cannot be mixed within the same SQL statement.
+
+New Open SQL improves the readability, maintainability, and tool support of SQL statements. It also enables auto code completion in **`ABAP Development Tools (ADT)`**. Importantly, CDS views are based entirely on New Open SQL syntax.
+
+## Limitations of Classical ABAP Dictionary Views
+
+Classical ABAP Dictionary views have significant limitations.
+
+They support only **`INNER JOIN`** and do not allow:
+
+- `Calculation expressions`
+- `Aggregations`
+- `Grouping`
+- `Nested views`
+
+These restrictions make it difficult to model complex data scenarios directly at the database level.
+
+## Core Data Services
+
+To address these limitations, SAP introduced **Core Data Services (CDS)**.
+
+CDS views support advanced SQL features such as different join types, expressions, aggregations, grouping, and view composition.
+
+They are designed to fully leverage SAP HANA’s in-memory capabilities and enable efficient **code push-down**, making them a key building block for modern ABAP and SAP HANA–based applications.
