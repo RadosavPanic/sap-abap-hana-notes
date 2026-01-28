@@ -58,3 +58,60 @@ currcode `as` Currency_Code,
 url `as` Airline_URL
 
 `}`
+
+## Types of Annotations
+
+Based on scope of annotations, they can be divided in 5 groups:
+
+- View annotations
+- Element annotations
+- Parameter annotations
+- Extension annotations
+- Function annotations
+
+### View Annotations
+
+View annotations are annotations for CDS Views and are used in front of `DEFINE VIEW` to define different view options.
+
+Examples:
+
+- `@AbapCatalog.sqlViewName`: 'Z_CDS_SQL_Example1'
+- `@EndUserText.label`: 'Description of CDS View'
+
+### Element Annotations
+
+Used for targeting individual elements in the `SELECT` list. Placed before or after the field.
+
+Examples:
+
+- `@Semantics.amount.currencyCode`: 'local_currency_key'
+- `@Semantics.currencyCode`: true
+
+### Parameter Annotations
+
+Used for view parameters. Placed before or after the parameter declaration.
+
+Examples:
+
+- `@Environment.systemfield`: #SYSTEM_DATE
+- `@Consumption.filter.selectionType`
+- `@Analytics.filterRange`
+  ​
+
+### Extension Annotations
+
+Used for extending CDS views. Placed before the `EXTEND VIEW` statement.
+
+Examples:
+
+- `AbapCatalog.sqlViewAppendName`: 'Z_CDS_SQL_Example_number"
+- `@AbapCatalog.extension.version`
+  ​
+
+### Function Annotations
+
+Used for CDS table functions. Placed before the `DEFINE TABLE FUNCTION` statement.
+
+Examples:
+
+- `@Analytics.dataExtraction.enabled`
