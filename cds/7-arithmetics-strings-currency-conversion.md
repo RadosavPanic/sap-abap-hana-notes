@@ -44,3 +44,16 @@ Operand can be:
 - Arithmetic expression
 - Case expressions with `CASE`
 - Predefined function
+
+## Built-in functions for string processing
+
+String expressions are supported in ABAP CDS and here are some built-in functions:
+
+- `concat`**(a1, a2)**: concatenates two strings, returns result of type `CHAR` or `STRING`.
+  Corresponds to ABAP statement `CONCATENATE` without addition `SEPARATED BY`
+- `replace`**(a1, a2, a3)**: Result type depends on a1. Inside a1 string, it replaces all a2 occurences with a3.
+  Corresponds to ABAP statement `REPLACE ALL OCCURENCES` of a2 inside a1 with a3.
+- `substring`**(a1, position, length)**: Result type depends on type of a1. Function looks into a1 string, and based on 2nd position argument and 3rd length argument, it returns sliced string - substring.
+  Similar to **ABAP function substring()** or `direct substring access`.
+- `length`**(a1)**: Returns length of the string, with result of type `INT4`.
+  Corresponds to ABAP function `numofchar()`.
