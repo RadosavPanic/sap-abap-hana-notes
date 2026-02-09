@@ -57,3 +57,26 @@ String expressions are supported in ABAP CDS and here are some built-in function
   Similar to **ABAP function substring()** or `direct substring access`.
 - `length`**(a1)**: Returns length of the string, with result of type `INT4`.
   Corresponds to ABAP function `numofchar()`.
+
+## Built-in functions for currency and unit processing
+
+To make values in different units or currencies comparable with each other, they need to be converted.
+
+### Unit Conversion
+
+`unit_conversion`(**quantity** => a1,
+**source_unit** => a2,
+**target_unit** => a3)
+
+Unit conversion returns result of type `abap.quan` for quantity.
+Converts a quantity in source unit into a value in target unit. Rules are maintained in transaction CUNI and stored in database table T006.
+
+### Currency Conversion
+
+`currency_conversion`(**amount** => a1,
+**source_currency** => a2,
+**target_currency** => a3,
+**exchange_rate_date** => a4)
+
+Currency conversion returns result of type `abap.curr` for currency.
+Converts an amount in source currency into a value in target currency, based on date of exchange rate. Rules are maitained in transaction OB08 and stored in database tables TCUR.
